@@ -1,0 +1,156 @@
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/any.proto";
+
+option java_multiple_files = true;
+option java_package = "com.adobe.acp.myupstream";
+option java_outer_classname = "MyUpstreamProto";
+option objc_class_prefix = "RTG";
+
+package myupstream;
+
+// Interface exported by the server.
+service MyUpstream {
+
+  rpc GetInfo(AssetId) returns (AssetInfo) {}
+  rpc GetNodeInfo(AssetId) returns (NodeInfo) {}
+  rpc GetPage(Limit) returns (PageInfo) {}
+}
+
+message Limit {
+  uint64 numOfChildren = 1;
+}
+
+message AssetId {
+  uint64 id = 1;
+}
+
+message AssetInfo {
+  uint64 id = 1;
+  string name = 2;
+}
+
+message NodeInfo {
+
+  message System {
+    string idPath = 1;
+    string acpGuidPath = 2;
+    string scRootCollectionAssetId = 3;
+    string fullNamePath = 4;
+    bool orphaned = 5;
+    string clientId = 6;
+  }
+
+  message Owner {
+    string id = 1;
+    string type = 2;
+  }
+
+  message Generations {
+    uint32 repoMetadata = 1;
+    uint32 primary = 2;
+  }
+
+  message _modificationinfo {
+  }
+
+  string repositoryId = 1;
+  string partitionPrefix = 2;
+  string baseDirectoryId = 3;
+  string path = 4;
+  System system = 5;
+  string region = 6;
+  Owner owner = 7;
+  string nodeId = 8;
+  string name = 9;
+  string assetId = 10;
+  string mediaType = 11;
+  string etag = 12;
+  google.protobuf.Timestamp createDate = 13;
+  string createdBy = 14;
+  google.protobuf.Timestamp modifyDate = 15;
+  string modifiedBy = 16;
+  google.protobuf.Timestamp deviceCreateDate = 17;
+  google.protobuf.Timestamp deviceModifyDate = 18;
+  string state = 19;
+  Generations generations = 20;
+  string repoAssetClass = 21;
+  string nodeType = 22;
+  _modificationinfo _modificationInfo = 23;
+}
+
+message PageInfo {
+
+  message System {
+    string idPath = 1;
+    string acpGuidPath = 2;
+    string scRootCollectionAssetId = 3;
+    string fullNamePath = 4;
+    bool orphaned = 5;
+    string clientId = 6;
+  }
+
+  message Owner {
+    string id = 1;
+    string type = 2;
+  }
+
+  message Generations {
+    uint32 repoMetadata = 1;
+    uint32 primary = 2;
+  }
+
+  message _modificationinfo {
+  }
+
+  message Child {
+    string nodeId = 1;
+    string name = 2;
+    string assetId = 3;
+    string mediaType = 4;
+    string etag = 5;
+    google.protobuf.Timestamp createDate = 6;
+    string createdBy = 7;
+    google.protobuf.Timestamp modifyDate = 8;
+    string modifiedBy = 9;
+    google.protobuf.Timestamp deviceCreateDate = 10;
+    google.protobuf.Timestamp deviceModifyDate = 11;
+    string state = 12;
+    Generations generations = 13;
+    string repoAssetClass = 14;
+    string nodeType = 15;
+  }
+
+  message _pagE {
+    bool pageBoundaryReached = 1;
+  }
+
+
+  string nodeId = 1;
+  string name = 2;
+  string assetId = 3;
+  string mediaType = 4;
+  string etag = 5;
+  google.protobuf.Timestamp createDate = 6;
+  string createdBy = 7;
+  google.protobuf.Timestamp modifyDate = 8;
+  string modifiedBy = 9;
+  google.protobuf.Timestamp deviceCreateDate = 10;
+  google.protobuf.Timestamp deviceModifyDate = 11;
+  string state = 12;
+  Generations generations = 13;
+  string repoAssetClass = 14;
+  string nodeType = 15;
+  string repositoryId = 16;
+  string partitionPrefix = 17;
+  string baseDirectoryId = 18;
+  string path = 19;
+  System system = 20;
+  string region = 21;
+  Owner owner = 22;
+  repeated Child children = 23;
+  repeated google.protobuf.Any tags = 24;
+  _pagE _page = 25;
+  _modificationinfo _modificationInfo = 26;
+
+}
